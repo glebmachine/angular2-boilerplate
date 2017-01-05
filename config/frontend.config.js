@@ -7,7 +7,7 @@ const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
 // base config
 const webpackConfig = {
   entry: {
-    application: './frontend/index.ts',
+    application: './frontend/bootstrap.ts',
     vendor: './frontend/vendor.ts',
   },
   output: {
