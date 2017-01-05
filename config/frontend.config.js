@@ -25,7 +25,7 @@ const webpackConfig = {
       {
         test: /\.ts$/,
         exclude: [/node_modules/],
-        loader: 'ts',
+        loader: 'awesome-typescript-loader?{configFileName: "tsconfig.webpack.json"}',
       },
       {
         test: /\.jade$/,
@@ -38,6 +38,7 @@ const webpackConfig = {
       template: './frontend/index.jade',
       filename: 'index.html',
     }),
+    new webpack.NamedModulesPlugin(),
   ],
 };
 
