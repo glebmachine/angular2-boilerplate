@@ -1,11 +1,10 @@
-
-
 const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
 
 module.exports = {
   entry: {
-     app : './frontend/application.ts',
-    },
+    application : './frontend/application.ts',
+    vendor: './frontend/vendor.ts',
+  },
   output: {
     path: './www/',
     publicPath: '/',
@@ -13,4 +12,13 @@ module.exports = {
     filename: NODE_ENV === 'development' ? 'build/[name].[hash].js' : 'build/[name].[chunkhash].js',
     chunkFilename: NODE_ENV === 'development' ? 'chunk/[id].[hash].js' : 'chunk/[id].[chunkhash].js',
   },
+   module: {
+      loaders: [
+        {
+          test: /\.ts$/,
+          exclude: [ /node_modules/ ],
+          loader: 'ts',
+        }
+      ],
+   },
 };
