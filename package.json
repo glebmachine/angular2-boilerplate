@@ -1,28 +1,40 @@
 {
-  "dependencies": {
-    "@angular/common": "^2.4.1",
-    "@angular/compiler": "^2.4.1",
-    "@angular/core": "^2.4.1",
-    "@angular/http": "^2.4.1",
-    "@angular/platform-browser": "^2.4.1",
-    "@angular/platform-browser-dynamic": "^2.4.1",
-    "@angular/router": "^3.4.1",
-    "awesome-typescript-loader": "^3.0.0-beta.17",
-    "html-loader": "^0.4.4",
-    "html-webpack-plugin": "^2.26.0",
-    "jade": "^1.11.0",
-    "jade-html-loader": "^0.0.3",
-    "reflect-metadata": "^0.1.9",
-    "rxjs": "^5.0.2",
-    "typescript": "^2.1.4",
-    "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.2",
-    "webpack-merge": "^2.1.0",
-    "zone.js": "^0.7.4"
-  },
-  "scripts": {
-    "start": "webpack-dev-server --progress --inline --hot",
-    "build": "npm run build:webpack",
-    "build:webpack": "webpack --bail --profile"
-  }
+    "dependencies": {
+        "@angular/common": "2.3.1",
+        "@angular/compiler": "2.3.1",
+        "@angular/core": "2.3.1",
+        "@angular/http": "2.3.1",
+        "@angular/platform-browser": "2.3.1",
+        "@angular/platform-browser-dynamic": "2.3.1",
+        "@angular/router": "3.4.1",
+        "core-js": "2.4.1",
+        "reflect-metadata": "0.1.9",
+        "rxjs": "5.0.2",
+        "zone.js": "0.7.4"
+    },
+    "devDependencies": {
+        "@types/requirejs": "2.1.28",
+        "@types/webpack": "2.1.0",
+        "awesome-typescript-loader": "3.0.0-beta.17",
+        "css-loader": "0.26.1",
+        "html-loader": "0.4.4",
+        "html-webpack-plugin": "2.26.0",
+        "jade": "1.11.0",
+        "jade-html-loader": "0.0.3",
+        "npm-run-all": "4.0.0",
+        "raw-loader": "0.5.1",
+        "stylus": "0.54.5",
+        "stylus-loader": "2.4.0",
+        "typescript": "2.1.4",
+        "webpack": "1.14.0",
+        "webpack-dev-server": "1.16.2",
+        "webpack-merge": "2.1.0"
+    },
+    "scripts": {
+        "start": "webpack-dev-server --progress --inline --hot",
+        "build": "npm run build:webpack",
+        "build:webpack": "run-s build:webpack:*",
+        "build:webpack:dll": "webpack --config ./config/dll.config.js",
+        "build:webpack:application": "webpack --bail --profile"
+    }
 }

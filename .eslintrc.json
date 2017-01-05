@@ -2,12 +2,13 @@
   "max-len": 0,
   "extends": "airbnb",
   "rules": {
-    "global-require": 0
+    "global-require": 0,
+    "import/no-extraneous-dependencies": 0
   },
   "globals": {
-    "NODE_ENV": "true",
-    "navigator": "true",
-    "window": "true",
-    "document": "true"
+    "NODE_ENV": true,
+    "navigator": true,
+    "window": true,
+    "document": true
   }
 }
