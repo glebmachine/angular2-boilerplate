@@ -2939,6 +2939,12 @@ to-arraybuffer@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/to-arraybuffer/-/to-arraybuffer-1.0.1.tgz#7d229b1fcc637e466ca081180836a7aabff83f43"
 
+to-string-loader@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/to-string-loader/-/to-string-loader-1.1.5.tgz#7b7aa17891b7bb4947a7a11bfb03b5fde9c6e695"
+  dependencies:
+    loader-utils "^0.2.16"
+
 toposort@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/toposort/-/toposort-1.0.0.tgz#b66cf385a1a8a8e68e45b8259e7f55875e8b06ef"
@@ -3149,6 +3155,10 @@ webpack-dev-server@1.16.2:
     strip-ansi "^3.0.0"
     supports-color "^3.1.1"
     webpack-dev-middleware "^1.4.0"
+
+webpack-error-notification@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/webpack-error-notification/-/webpack-error-notification-0.1.6.tgz#ebfcbd4ef46b83466b59c12fde8790168f47a257"
 
 webpack-merge@2.1.0:
   version "2.1.0"

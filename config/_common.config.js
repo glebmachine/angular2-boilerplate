@@ -1,6 +1,9 @@
+const WebpackErrorNotificationPlugin = require('webpack-error-notification');
+const webpackMerge = require('webpack-merge');
+
 global.NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
 
-module.exports = {
+const webpackConfig = {
   output: {
     path: './www/',
     publicPath: '/',
@@ -21,15 +24,18 @@ module.exports = {
         test: /\.ts$/,
         exclude: [/node_modules/],
         loaders: [
+          'awesome-typescript-loader?{configFileName: "tsconfig.json"}',
           'angular2-template-loader',
-          'awesome-typescript-loader?{configFileName: "tsconfig.json"}'
         ],
       }, {
-        test: /\.(html|css)$/,
-        loader: 'raw-loader',
+        test: /\.html$/,
+        loader: 'html',
+      }, {
+        test: /\.css$/,
+        loader: 'to-string!css',
       }, {
         test: /\.styl$/,
-        loader: '!raw!css!stylus',
+        loader: 'to-string!css!stylus',
       }, {
         test: /\.jade$/,
         loader: 'html!jade-html',
@@ -37,3 +43,16 @@ module.exports = {
     ],
   },
 };
+
+const webpackDevelopmentConfig = {
+  plugins: [
+    new WebpackErrorNotificationPlugin(),
+  ],
+};
+
+if (NODE_ENV === 'development') {
+  module.exports = webpackMerge(webpackConfig, webpackDevelopmentConfig);
+} else {
+  module.exports = webpackConfig;
+}
+

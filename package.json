@@ -26,9 +26,11 @@
         "raw-loader": "0.5.1",
         "stylus": "0.54.5",
         "stylus-loader": "2.4.0",
+        "to-string-loader": "^1.1.5",
         "typescript": "2.1.4",
         "webpack": "1.14.0",
         "webpack-dev-server": "1.16.2",
+        "webpack-error-notification": "^0.1.6",
         "webpack-merge": "2.1.0"
     },
     "scripts": {
