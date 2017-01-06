@@ -42,6 +42,9 @@ const webpackConfig = {
       name: '[name]',
     }),
   ],
+  performance: {
+    hints: false,
+  },
 };
 
 module.exports = webpackMerge(commonConfig, webpackConfig);

@@ -1,14 +1,12 @@
 // Polyfills
 import 'reflect-metadata';
 import 'zone.js';
+import 'rxjs';
 
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent }  from './application';
 import { RouterModule }  from '@angular/router';
-
-// RxJS
-import 'rxjs';
 
 @NgModule({
   imports:      [
