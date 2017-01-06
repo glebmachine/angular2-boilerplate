@@ -44,6 +44,7 @@
     "start": "webpack-dev-server --progress --inline --hot",
     "build": "npm run build:webpack",
     "build:webpack": "run-s build:webpack:*",
+    "build:aot": "ngc",
     "build:webpack:dll": "webpack --config ./config/dll.config.js",
     "build:webpack:application": "webpack --bail --profile"
   }

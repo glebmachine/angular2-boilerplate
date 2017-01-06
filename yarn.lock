@@ -59,6 +59,10 @@
     magic-string "^0.16.0"
     source-map "^0.5.6"
 
+"@types/core-js@0.9.35":
+  version "0.9.35"
+  resolved "https://registry.yarnpkg.com/@types/core-js/-/core-js-0.9.35.tgz#444064e63711cdcc62ea844d27642f6efc2285f2"
+
 "@types/requirejs@2.1.28":
   version "2.1.28"
   resolved "https://registry.yarnpkg.com/@types/requirejs/-/requirejs-2.1.28.tgz#bfb2c1d5a03a22ab137ff020abae9338b66efdad"
