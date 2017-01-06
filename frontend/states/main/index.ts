@@ -1,14 +1,10 @@
 import { Component, NgModule } from '@angular/core';
 
 @Component({
-  template: `
-    <div class="mainpage">
-      <h3>Main Page!</h3>
-    </div>
-  `,
-  // styles: [
-  //   // require('./style.styl'),
-  // ],
+  template: require('./tpl.html'),
+  styles: [
+    require('./style.css'),
+  ],
 })
 export class MainStateComponent {
 
