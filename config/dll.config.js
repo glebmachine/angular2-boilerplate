@@ -25,7 +25,18 @@ const webpackConfig = {
     library: '[name]',
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      beautify: false,
+      mangle: {
+        screw_ie8: true,
+        keep_fnames: true,
+      },
+      compress: {
+        warnings: false,
+        screw_ie8: true,
+      },
+      comments: false,
+    }),
     new webpack.DllPlugin({
       path: 'www/manifests/[name]-manifest.json',
       name: '[name]',

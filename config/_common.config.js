@@ -5,7 +5,7 @@ global.NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
 
 const webpackConfig = {
   output: {
-    path: './www/',
+    path: `${process.cwd()}www/`,
     publicPath: '/',
     // при HMR нельзя у модуля использовать chunkhash, поэтому на тестовой среде это обычный хеш
     filename: NODE_ENV === 'development'
@@ -16,36 +16,39 @@ const webpackConfig = {
       : 'chunk/[id].js?[chunkhash]',
   },
   resolve: {
-    extensions: ['', '.ts', '.js', '.styl', '.css'],
+    extensions: ['.ts', '.js', '.styl', '.css'],
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.ts$/,
         exclude: [/node_modules/],
-        loaders: [
+        use: [
           'awesome-typescript-loader?{configFileName: "tsconfig.json"}',
           'angular2-template-loader',
           'angular-router-loader',
         ],
       }, {
         test: /\.jade$/,
-        loader: 'html!jade-html',
+        use: ['html-loader', 'jade-html-loader'],
       }, {
         test: /\.html$/,
-        loader: 'html',
+        use: ['html-loader'],
       }, {
         test: /\.css$/,
-        loader: 'to-string!css',
+        use: ['to-string-loader', 'css-loader'],
       }, {
         test: /\.styl$/,
-        loader: 'to-string!css!stylus',
+        use: ['to-string-loader', 'css-loader', 'stylus-loader'],
       },
     ],
   },
 };
 
 const webpackDevelopmentConfig = {
+  output: {
+    pathinfo: true,
+  },
   plugins: [
     new WebpackErrorNotificationPlugin(),
   ],

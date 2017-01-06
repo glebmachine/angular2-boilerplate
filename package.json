@@ -29,8 +29,8 @@
         "stylus-loader": "2.4.0",
         "to-string-loader": "^1.1.5",
         "typescript": "2.1.4",
-        "webpack": "1.14.0",
-        "webpack-dev-server": "1.16.2",
+        "webpack": "v2.2.0-rc.3",
+        "webpack-dev-server": "v2.2.0-rc.0",
         "webpack-error-notification": "^0.1.6",
         "webpack-merge": "2.1.0"
     },

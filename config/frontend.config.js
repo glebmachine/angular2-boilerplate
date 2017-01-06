@@ -24,7 +24,18 @@ const webpackConfig = {
 // production extension
 const webpackConfigProduction = {
   plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      beautify: false,
+      mangle: {
+        screw_ie8: true,
+        keep_fnames: true,
+      },
+      compress: {
+        warnings: false,
+        screw_ie8: true,
+      },
+      comments: false,
+    }),
   ],
 };
 
