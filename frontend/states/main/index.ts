@@ -1,7 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 
 @Component({
-  template: require('./tpl.html'),
+  template: require('./tpl.jade'),
   styles: [
     require('./style.styl'),
   ],

@@ -21,7 +21,7 @@
         "html-loader": "0.4.4",
         "html-webpack-plugin": "2.26.0",
         "jade": "1.11.0",
-        "jade-html-loader": "0.0.3",
+        "jade-html-loader": "^0.0.3",
         "npm-run-all": "4.0.0",
         "raw-loader": "0.5.1",
         "stylus": "0.54.5",

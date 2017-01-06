@@ -28,6 +28,9 @@ const webpackConfig = {
           'angular2-template-loader',
         ],
       }, {
+        test: /\.jade$/,
+        loader: 'html!jade-html',
+      }, {
         test: /\.html$/,
         loader: 'html',
       }, {
@@ -36,9 +39,6 @@ const webpackConfig = {
       }, {
         test: /\.styl$/,
         loader: 'to-string!css!stylus',
-      }, {
-        test: /\.jade$/,
-        loader: 'html!jade-html',
       },
     ],
   },

@@ -1500,7 +1500,7 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
-jade-html-loader@0.0.3:
+jade-html-loader@^0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/jade-html-loader/-/jade-html-loader-0.0.3.tgz#82048b486e7962267938f58cd1eafd9cc0003ecc"
   dependencies:
