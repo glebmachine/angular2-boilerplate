@@ -42,9 +42,10 @@
   },
   "scripts": {
     "start": "webpack-dev-server --progress --inline --hot",
-    "build": "npm run build:webpack",
+    "build": "run-s build:*",
+    "build:clear": "rm -rf www && rm -rf .compiled",
     "build:webpack": "run-s build:webpack:*",
-    "build:aot": "ngc",
+    "build:aot": "ngc -p tsconfig.aot.json",
     "build:webpack:dll": "webpack --config ./config/dll.config.js",
     "build:webpack:application": "webpack --bail --profile"
   }
