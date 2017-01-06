@@ -26,6 +26,7 @@ const webpackConfig = {
         loaders: [
           'awesome-typescript-loader?{configFileName: "tsconfig.json"}',
           'angular2-template-loader',
+          'angular-router-loader',
         ],
       }, {
         test: /\.jade$/,

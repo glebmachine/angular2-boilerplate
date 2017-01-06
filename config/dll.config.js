@@ -25,7 +25,7 @@ const webpackConfig = {
     library: '[name]',
   },
   plugins: [
-    // new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin(),
     new webpack.DllPlugin({
       path: 'www/manifests/[name]-manifest.json',
       name: '[name]',

@@ -7,9 +7,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent }  from './application';
 import { RouterModule }  from '@angular/router';
 
-import { MainStateComponent } from './states/main/index';
-import { AboutStateComponent } from './states/about/index';
-
 // RxJS
 import 'rxjs';
 
@@ -18,11 +15,12 @@ import 'rxjs';
     BrowserModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/main', pathMatch: 'full' },
-      { path: 'main', component: MainStateComponent },
-      { path: 'about', component: AboutStateComponent },
+      { path: 'main', loadChildren: './states/main/index#MainStateModule' },
+      { path: 'team', loadChildren: './states/team/index#MainStateModule' },
+      { path: 'about', loadChildren: './states/about/index#MainStateModule?sync=true' },
     ])
   ],
-  declarations: [ AppComponent, MainStateComponent, AboutStateComponent ],
+  declarations: [ AppComponent ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
