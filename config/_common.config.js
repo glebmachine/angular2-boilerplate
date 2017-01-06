@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const WebpackErrorNotificationPlugin = require('webpack-error-notification');
 const webpackMerge = require('webpack-merge');
 
@@ -43,6 +44,11 @@ const webpackConfig = {
       },
     ],
   },
+  plugins: [
+    new webpack.ContextReplacementPlugin(
+      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/
+    ),
+  ],
 };
 
 const webpackDevelopmentConfig = {
