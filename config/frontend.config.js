@@ -6,7 +6,7 @@ const commonConfig = require('./_common.config.js');
 // base config
 const webpackConfig = {
   entry: {
-    application: './frontend/bootstrap.ts',
+    application: './frontend/bootstrap.browser.ts',
   },
   plugins: [
     new webpack.DllReferencePlugin({

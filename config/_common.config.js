@@ -2,6 +2,7 @@ const WebpackErrorNotificationPlugin = require('webpack-error-notification');
 const webpackMerge = require('webpack-merge');
 
 global.NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
+const AOT = true;
 
 const webpackConfig = {
   output: {
@@ -26,7 +27,7 @@ const webpackConfig = {
         use: [
           'awesome-typescript-loader?{configFileName: "tsconfig.json"}',
           'angular2-template-loader',
-          'angular-router-loader',
+          `angular-router-loader?loader=system&genDir=.compiled/aot&aot=${AOT}`,
         ],
       }, {
         test: /\.jade$/,
