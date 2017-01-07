@@ -18,7 +18,7 @@ const webpackConfig = {
       : 'chunk/[id].js?[chunkhash]',
   },
   resolve: {
-    extensions: ['.ts', '.ngfactory.ts', '.js', '.styl', '.css'],
+    extensions: ['.ts', '.js', '.styl', '.css'],
   },
   module: {
     rules: [
@@ -31,7 +31,7 @@ const webpackConfig = {
         use: [
           'awesome-typescript-loader?{configFileName: "tsconfig.json", cacheDirectory: ".compiled/awcache"}',
           'angular2-template-loader',
-          `angular-router-loader?loader=system&genDir=.compiled/aot&aot=${AOT}`,
+          `angular-router-loader?loader=system&genDir=.compiled/frontend&aot=${AOT}`,
         ],
       }, {
         test: /\.jade$/,
@@ -41,17 +41,25 @@ const webpackConfig = {
         use: ['html-loader'],
       }, {
         test: /\.css$/,
-        use: ['to-string-loader', 'css-loader'],
+        use: ['to-string-loader', 'css-loader?minimize'],
       }, {
         test: /\.styl$/,
-        use: ['to-string-loader', 'css-loader', 'stylus-loader'],
+        use: ['to-string-loader', 'css-loader?minimize', 'stylus-loader'],
       },
     ],
   },
   plugins: [
     // Лечит часть проблем внутри ангуляра
     new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/),
+    new webpack.DefinePlugin({
+      NODE_ENV: JSON.stringify(NODE_ENV),
+      AOT: JSON.stringify(AOT),
+    }),
   ],
+
+  performance: {
+    hints: false,
+  },
 };
 
 const webpackDevelopmentConfig = {

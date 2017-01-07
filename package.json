@@ -22,6 +22,8 @@
     "angular-router-loader": "0.4.0",
     "angular2-template-loader": "0.6.0",
     "awesome-typescript-loader": "3.0.0-beta.17",
+    "babili-webpack-plugin": "^0.0.7",
+    "compression-webpack-plugin": "^0.3.2",
     "css-loader": "0.26.1",
     "html-loader": "0.4.4",
     "html-webpack-plugin": "2.26.0",
@@ -46,6 +48,6 @@
     "build:webpack": "run-s build:webpack:*",
     "build:aot": "ngc -p tsconfig.aot.json",
     "build:webpack:dll": "webpack --config ./config/dll.config.js",
-    "build:webpack:application": "webpack --bail --profile"
+    "build:webpack:application": "AOT=false NODE_ENV='production' webpack"
   }
 }
