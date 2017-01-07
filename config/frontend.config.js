@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const BabiliPlugin = require('babili-webpack-plugin');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./_common.config.js');
 const zlib = require('zlib');
@@ -63,7 +62,6 @@ const webpackConfigProduction = {
       },
       comments: false,
     }),
-    // new BabiliPlugin(),
     // new CompressionPlugin({
     //   algorithm: (buffer, callback) => zlib.gzip(buffer, { level: 9 }, callback),
     //   regExp: /\.css$|\.html$|\.js$|\.map$/,
