@@ -18,13 +18,16 @@ const webpackConfig = {
       : 'chunk/[id].js?[chunkhash]',
   },
   resolve: {
-    extensions: ['.ts', '.js', '.styl', '.css'],
+    extensions: ['.ts', '.ngfactory.ts', '.js', '.styl', '.css'],
   },
   module: {
     rules: [
       {
         test: /\.ts$/,
-        exclude: [/node_modules/],
+        include: [
+          /compiled/,
+          /frontend/,
+        ],
         use: [
           'awesome-typescript-loader?{configFileName: "tsconfig.json", cacheDirectory: ".compiled/awcache"}',
           'angular2-template-loader',
