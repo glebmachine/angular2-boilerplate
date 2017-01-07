@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./_common.config.js');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const AOT = process.env.AOT ? process.env.AOT : false;
 const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
@@ -20,6 +21,7 @@ const webpackConfig = {
       filename: 'index.html',
     }),
     new webpack.NamedModulesPlugin(),
+    new webpack.ProgressPlugin(),
   ],
 };
 
@@ -60,6 +62,13 @@ const webpackConfigProduction = {
     }),
     new CompressionPlugin({
       asset: '[path].gz?[query]',
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      openAnalyzer: false,
+      reportFilename: 'bundle_report.html',
+      statsFilename: 'bundle_stats.json',
+      generateStatsFile: true,
     }),
   ],
 };
