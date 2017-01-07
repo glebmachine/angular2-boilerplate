@@ -11,7 +11,7 @@ const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
 // base config
 const webpackConfig = {
   entry: {
-    application: AOT == true
+    application: AOT === true
       ? './frontend/bootstrap.browser.aot.ts'
       : './frontend/bootstrap.browser.ts',
   },
@@ -52,21 +52,17 @@ const webpackConfigProduction = {
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,
-      mangle: {
-        screw_ie8: true,
-        keep_fnames: true,
-      },
-      compress: {
-        warnings: false,
-        screw_ie8: true,
-      },
+      mangle: true,
+      compress: true,
       comments: false,
     }),
-    // new CompressionPlugin({
-    //   algorithm: (buffer, callback) => zlib.gzip(buffer, { level: 9 }, callback),
-    //   regExp: /\.css$|\.html$|\.js$|\.map$/,
-    //   threshold: 2 * 1024,
-    // }),
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8
+    }),
   ],
 };
 
