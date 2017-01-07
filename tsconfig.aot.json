@@ -5,34 +5,25 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "noEmitHelpers": true,
-    "pretty": true,
-    "sourceMap": true,
-    "lib": ["es5", "dom"],
     "noEmit": true,
-    "strictNullChecks": false,
-    "skipDefaultLibCheck": true,
-    "outDir": "./.compiled",
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "sourceMap": true,
+    "lib": ["es2015", "dom"],
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "outDir": "./.compiled"
   },
   "exclude": [
     "node_modules",
-    "typings",
-    "frontend/bootstrap.browser.aot.ts"
+    "frontend/bootstrap.browser.aot.ts",
+    "**/*-aot.ts"
   ],
   "awesomeTypescriptLoaderOptions": {
     "useWebpackText": true,
     "forkChecker": true,
     "useCache": true
   },
-  "compileOnSave": false,
-  "buildOnSave": false,
-  "atom": { "rewriteTsconfig": false },
   "angularCompilerOptions": {
     "genDir": "./.compiled",
-    "debug": true,
     "skipMetadataEmit" : true
   }
 }

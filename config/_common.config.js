@@ -26,7 +26,7 @@ const webpackConfig = {
         test: /\.ts$/,
         exclude: [/node_modules/],
         use: [
-          'awesome-typescript-loader?{configFileName: "tsconfig.json"}',
+          'awesome-typescript-loader?{configFileName: "tsconfig.json", cacheDirectory: ".compiled/awcache"}',
           'angular2-template-loader',
           `angular-router-loader?loader=system&genDir=.compiled/aot&aot=${AOT}`,
         ],
@@ -46,9 +46,8 @@ const webpackConfig = {
     ],
   },
   plugins: [
-    new webpack.ContextReplacementPlugin(
-      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/
-    ),
+    // Лечит часть проблем внутри ангуляра
+    new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/),
   ],
 };
 

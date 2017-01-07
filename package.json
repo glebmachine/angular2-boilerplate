@@ -17,7 +17,6 @@
   "devDependencies": {
     "@angular/compiler-cli": "2.4.2",
     "@angular/platform-server": "2.4.2",
-    "@ngtools/webpack": "1.2.1",
     "@types/requirejs": "2.1.28",
     "@types/systemjs": "^0.19.33",
     "@types/webpack": "2.1.0",
@@ -44,7 +43,7 @@
     "postinstall": "npm run build:webpack:dll",
     "start": "webpack-dev-server --progress --inline --hot",
     "build": "run-s build:*",
-    "build:clear": "rm -rf www && rm -rf .compiled",
+    "build:clear": "rm -rf www && rm -rf .compiled && mkdir .compiled;",
     "build:webpack": "run-s build:webpack:*",
     "build:aot": "ngc -p tsconfig.aot.json",
     "build:webpack:dll": "webpack --config ./config/dll.config.js",
