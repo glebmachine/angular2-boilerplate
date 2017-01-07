@@ -5,13 +5,13 @@ const webpackMerge = require('webpack-merge');
 const commonConfig = require('./_common.config.js');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const AOT = process.env.AOT ? process.env.AOT : false;
+const AOT = process.env.AOT === 'true';
 const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
 
 // base config
 const webpackConfig = {
   entry: {
-    application: AOT === true
+    application: AOT
       ? './frontend/bootstrap.browser.aot.ts'
       : './frontend/bootstrap.browser.ts',
   },
@@ -72,6 +72,8 @@ const webpackConfigProduction = {
     }),
   ],
 };
+
+console.log(webpackConfig);
 
 if (NODE_ENV === 'production') {
   module.exports = webpackMerge(commonConfig, webpackConfig, webpackConfigProduction);
