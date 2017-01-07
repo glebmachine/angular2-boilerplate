@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./_common.config.js');
-const zlib = require('zlib');
 
 const AOT = process.env.AOT ? process.env.AOT : false;
 const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
@@ -60,11 +59,7 @@ const webpackConfigProduction = {
       comments: false,
     }),
     new CompressionPlugin({
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: /\.js$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.8,
+      asset: '[path].gz?[query]',
     }),
   ],
 };
