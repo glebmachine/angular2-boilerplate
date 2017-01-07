@@ -3,7 +3,7 @@ const WebpackErrorNotificationPlugin = require('webpack-error-notification');
 const webpackMerge = require('webpack-merge');
 
 global.NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
-const AOT = true;
+const AOT = process.env.AOT ? process.env.AOT : false;
 
 const webpackConfig = {
   output: {

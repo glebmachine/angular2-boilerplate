@@ -5,15 +5,14 @@ const commonConfig = require('./_common.config.js');
 const webpackConfig = {
   entry: {
     vendors: [
-      // 'reflect-metadata',
-      // 'zone.js',
-      // '@angular/platform-browser',
-      // '@angular/platform-browser-dynamic',
+      'core-js/es7/reflect',
+      'zone.js',
+      '@angular/platform-browser',
+      '@angular/platform-browser-dynamic',
       '@angular/core',
-      // '@angular/common',
-      // '@angular/http',
-      // '@angular/router',
-      // 'rxjs',
+      '@angular/common',
+      '@angular/http',
+      '@angular/router',
     ],
   },
   output: {
