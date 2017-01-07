@@ -54,7 +54,7 @@
   version "0.31.32"
   resolved "https://registry.yarnpkg.com/@types/es6-shim/-/es6-shim-0.31.32.tgz#8196c09e1e40ac977c713bf258090989f501d8ff"
 
-"@types/requirejs@2.1.28":
+"@types/requirejs@^2.1.28":
   version "2.1.28"
   resolved "https://registry.yarnpkg.com/@types/requirejs/-/requirejs-2.1.28.tgz#bfb2c1d5a03a22ab137ff020abae9338b66efdad"
 
@@ -3604,9 +3604,13 @@ with@~4.0.0:
     acorn "^1.0.1"
     acorn-globals "^1.0.3"
 
-wordwrap@0.0.2, wordwrap@~0.0.2:
+wordwrap@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-0.0.2.tgz#b79669bb42ecb409f83d583cad52ca17eaa1643f"
+
+wordwrap@~0.0.2:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-0.0.3.tgz#a3d5da6cd5c0bc0008d37234bbaf1bed63059107"
 
 wrap-ansi@^2.0.0:
   version "2.1.0"
