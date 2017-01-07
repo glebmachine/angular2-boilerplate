@@ -53,7 +53,10 @@ const webpackConfigProduction = {
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,
       mangle: true,
-      compress: true,
+      compress: {
+        warnings: false,
+      },
+      unsafe: true,
       comments: false,
     }),
     new CompressionPlugin({
@@ -61,7 +64,7 @@ const webpackConfigProduction = {
       algorithm: 'gzip',
       test: /\.js$|\.html$/,
       threshold: 10240,
-      minRatio: 0.8
+      minRatio: 0.8,
     }),
   ],
 };
