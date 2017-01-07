@@ -10,7 +10,7 @@
     "lib": ["es2015", "dom"],
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
-    "outDir": "./.compiled"
+    "outDir": "./.compiled/typescript"
   },
   "exclude": [
     "node_modules",

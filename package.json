@@ -1,9 +1,9 @@
 {
   "name": "angular2-boilerplate",
   "version": "0.1.4",
+  "license": "Apache-2.0",
   "dependencies": {
     "@angular/common": "2.4.2",
-    "@angular/compiler": "2.4.2",
     "@angular/core": "2.4.2",
     "@angular/http": "2.4.2",
     "@angular/platform-browser": "2.4.2",
@@ -14,6 +14,7 @@
     "zone.js": "0.7.4"
   },
   "devDependencies": {
+    "@angular/compiler": "2.4.2",
     "@angular/compiler-cli": "2.4.2",
     "@angular/platform-server": "2.4.2",
     "@types/requirejs": "2.1.28",
@@ -48,6 +49,6 @@
     "build:webpack": "run-s build:webpack:*",
     "build:aot": "ngc -p tsconfig.aot.json",
     "build:webpack:dll": "webpack --config ./config/dll.config.js",
-    "build:webpack:application": "AOT=false NODE_ENV='production' webpack"
+    "build:webpack:application": "AOT=true NODE_ENV='production' webpack"
   }
 }
