@@ -6,7 +6,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noEmitHelpers": true,
-    "pretty": false,
+    "pretty": true,
     "sourceMap": true,
     "lib": ["es5", "dom"],
     "noEmit": true,
