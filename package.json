@@ -47,7 +47,6 @@
   "scripts": {
     "postinstall": "npm run build:clear && npm run build:dll",
     "start": "webpack-dev-server --progress --inline --hot",
-    "start:webworker": "webpack-dev-server --progress --inline --hot --config ./config/webworker.config.js",
     "build": "npm run build && run build:webworker:prod && run build:ui:prod",
     "build:clear": "rm -rf www && rm -rf .compiled && mkdir .compiled;",
 
