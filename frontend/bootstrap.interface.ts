@@ -19,7 +19,7 @@ const workerScriptUrl = URL.createObjectURL(new Blob([`
     }
     return importScripts_.apply(this, scripts);
   };
-  importScripts('build/webworker.js');
+  importScripts('build/vendors.js', 'build/webworker.js');
 `], {
     type: 'text/javascript'
 }));

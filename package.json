@@ -32,6 +32,7 @@
     "html-webpack-plugin": "2.26.0",
     "jade": "1.11.0",
     "jade-html-loader": "0.0.3",
+    "node-static": "0.7.9",
     "npm-run-all": "4.0.0",
     "raw-loader": "0.5.1",
     "stylus": "0.54.5",
@@ -45,22 +46,23 @@
     "webpack-merge": "2.3.1"
   },
   "scripts": {
-    "postinstall": "npm run build:clear && npm run build:dll",
+    "postinstall": "npm run clear",
     "start": "webpack-dev-server --progress --inline --hot",
-    "build": "npm run build && run build:webworker:prod && run build:ui:prod",
-    "build:clear": "rm -rf www && rm -rf .compiled && mkdir .compiled;",
 
-    "build:dll": "NODE_ENV='production' webpack --config ./config/dll.config.js",
-    "build:dll:prod": "NODE_ENV='production' webpack --config ./config/dll.config.js",
+    "start:webworker": "run-p start:webworker:*",
+    "start:webworker:static": "static www",
+    "start:webworker:webworker": "DLL=true webpack --watch --progress --config ./config/webworker.config.js",
+    "start:webworker:interface": "DLL=true webpack --watch --progress --config ./config/interface.config.js",
 
-    "build:webworker": "webpack --config ./config/webworker.config.js",
-    "build:webworker:prod": "NODE_ENV='production' webpack --config ./config/webworker.config.js",
-
-    "build:ui": "webpack",
-    "build:ui:prod": "NODE_ENV='production' webpack",
-
+    "clear": "rm -rf www && rm -rf .compiled && mkdir .compiled;",
+    "build": "npm run build:dll && npm run build:webworker:prod && npm run build:interface:prod",
     "build:aot": "ngc -p tsconfig.aot.json",
-    "build:aot:ui": "AOT=true webpack",
-    "build:aot:ui:prod": "NODE_ENV='production' AOT=true webpack"
+    "build:aot:frontend": "AOT=true webpack",
+    "build:aot:frontend:prod": "NODE_ENV='production' AOT=true webpack",
+    "build:dll": "NODE_ENV='production' webpack --config ./config/dll.config.js",
+    "build:interface": "DLL=true webpack --config ./config/interface.config.js",
+    "build:interface:prod": "DLL=true NODE_ENV='production' webpack --config ./config/interface.config.js",
+    "build:webworker": "DLL=true webpack --config ./config/webworker.config.js",
+    "build:webworker:prod": "DLL=true NODE_ENV='production' webpack --config ./config/webworker.config.js"
   }
 }

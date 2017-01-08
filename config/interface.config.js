@@ -18,6 +18,7 @@ module.exports = webpackMerge(commonConfig, {
     new AddAssetHtmlPlugin({
       filepath: require.resolve('./../www/build/vendors.js'),
       includeSourcemap: false,
+      publicPath: '/build',
     }),
     new webpack.DllReferencePlugin({
       context: '.',
