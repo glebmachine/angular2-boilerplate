@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const WebpackErrorNotificationPlugin = require('webpack-error-notification');
 const webpackMerge = require('webpack-merge');
 const CompressionPlugin = require('compression-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
 const AOT = process.env.AOT === 'true';
@@ -53,14 +52,6 @@ const webpackConfig = {
       NODE_ENV: JSON.stringify(NODE_ENV),
       AOT: JSON.stringify(AOT),
     }),
-    // Выкладывает анализ билдов
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      openAnalyzer: false,
-      reportFilename: 'meta/bundle_report.html',
-      statsFilename: 'meta/bundle_stats.json',
-      generateStatsFile: true,
-    }),
   ],
   performance: {
     hints: false,
@@ -68,21 +59,24 @@ const webpackConfig = {
 };
 
 const webpackConfigDevelopment = {
+  devtool: 'cheap-module-source-map',
   output: {
     pathinfo: true,
   },
 };
 
 const webpackConfigProduction = {
-  devtool: 'inline-source-map',
   output: {
     // при HMR нельзя у модуля использовать chunkhash,
     // поэтому поэтому мы его подменяем только при боевой сборке
     // (это нужно, чтобы кешбастить только протухшие чанки)
-    filename: 'build/[name].js?[chunkhash]',
-    chunkFilename: 'chunk/[id].js?[chunkhash]',
+    // --- перестало работать, нужно разбираться
+    // filename: 'build/[name].js?[chunkhash]',
+    // chunkFilename: 'chunk/[id].js?[chunkhash]',
   },
   plugins: [
+    // new webpack.NamedModulesPlugin(), // делает красивые имена у файлов при HMR
+    new webpack.ProgressPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,
       mangle: true,

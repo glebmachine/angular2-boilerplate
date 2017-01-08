@@ -8,6 +8,8 @@
     "@angular/http": "4.0.0-beta.2",
     "@angular/platform-browser": "4.0.0-beta.2",
     "@angular/platform-browser-dynamic": "4.0.0-beta.2",
+    "@angular/platform-webworker": "4.0.0-beta.2",
+    "@angular/platform-webworker-dynamic": "4.0.0-beta.2",
     "@angular/router": "3.4.1",
     "core-js": "2.4.1",
     "rxjs": "5.0.2",
@@ -20,7 +22,7 @@
     "@types/requirejs": "2.1.28",
     "@types/systemjs": "0.19.33",
     "@types/webpack": "2.1.0",
-    "add-asset-html-webpack-plugin": "^1.0.2",
+    "add-asset-html-webpack-plugin": "1.0.2",
     "angular-router-loader": "0.4.0",
     "angular2-template-loader": "0.6.0",
     "awesome-typescript-loader": "3.0.0-beta.17",
@@ -37,22 +39,29 @@
     "to-string-loader": "1.1.5",
     "typescript": "2.1.4",
     "webpack": "v2.2.0-rc.3",
-    "webpack-bundle-analyzer": "^2.2.1",
+    "webpack-bundle-analyzer": "2.2.1",
     "webpack-dev-server": "v2.2.0-rc.0",
     "webpack-error-notification": "0.1.6",
     "webpack-merge": "2.3.1"
   },
   "scripts": {
     "postinstall": "npm run build:clear && npm run build:dll",
-    "start": "DLL=true webpack-dev-server --progress --inline --hot",
-    "build": "npm run build && run build:application:prod",
+    "start": "webpack-dev-server --progress --inline --hot",
+    "start:webworker": "webpack-dev-server --progress --inline --hot --config ./config/webworker.config.js",
+    "build": "npm run build && run build:webworker:prod && run build:ui:prod",
     "build:clear": "rm -rf www && rm -rf .compiled && mkdir .compiled;",
+
     "build:dll": "NODE_ENV='production' webpack --config ./config/dll.config.js",
-    "build:application": "webpack",
     "build:dll:prod": "NODE_ENV='production' webpack --config ./config/dll.config.js",
-    "build:application:prod": "NODE_ENV='production' webpack",
+
+    "build:webworker": "webpack --config ./config/webworker.config.js",
+    "build:webworker:prod": "NODE_ENV='production' webpack --config ./config/webworker.config.js",
+
+    "build:ui": "webpack",
+    "build:ui:prod": "NODE_ENV='production' webpack",
+
     "build:aot": "ngc -p tsconfig.aot.json",
-    "build:aot:application": "AOT=true webpack",
-    "build:aot:application:prod": "NODE_ENV='production' AOT=true webpack"
+    "build:aot:ui": "AOT=true webpack",
+    "build:aot:ui:prod": "NODE_ENV='production' AOT=true webpack"
   }
 }

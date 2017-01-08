@@ -1,32 +1,23 @@
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./_common.config.js');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const AOT = process.env.AOT === 'true';
 const DLL = process.env.DLL === 'true';
 const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
 
 // base config
 const webpackConfig = {
-  target: 'web',
+  target: 'webworker',
   entry: {
-    application: AOT
-      ? './frontend/bootstrap.browser.aot.ts'
-      : './frontend/bootstrap.browser.ts',
+    webworker: './frontend/bootstrap.worker.ts',
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './frontend/index.jade',
-      filename: 'index.html',
-    }),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       openAnalyzer: false,
-      reportFilename: 'meta/application_report.html',
-      statsFilename: 'meta/application_stats.json',
+      reportFilename: 'meta/webworker_report.html',
+      statsFilename: 'meta/webworker_stats.json',
       generateStatsFile: true,
     }),
   ],
@@ -35,10 +26,6 @@ const webpackConfig = {
 // Используем DLLки для быстрой разработки на локальной тачке
 if (DLL) {
   webpackConfig.plugins = webpackConfig.plugins.concat([
-    new AddAssetHtmlPlugin({
-      filepath: require.resolve('./../www/build/vendors.js'),
-      includeSourcemap: false,
-    }),
     new webpack.DllReferencePlugin({
       context: '.',
       manifest: require('./../www/meta/manifest-vendors.json'),
@@ -47,16 +34,16 @@ if (DLL) {
 }
 
 const webpackConfigDevelopment = {
-  devServer: {
-    contentBase: 'www',
-    historyApiFallback: true,
-    watchOptions: {
-      aggregateTimeout: 100,
-      poll: 1000,
-    },
-    port: 3000,
-    compress: true,
-  },
+  // devServer: {
+  //   contentBase: 'www',
+  //   historyApiFallback: true,
+  //   watchOptions: {
+  //     aggregateTimeout: 100,
+  //     poll: 1000,
+  //   },
+  //   port: 3000,
+  //   compress: true,
+  // },
 };
 
 const webpackConfigProduction = {

@@ -40,6 +40,14 @@
   dependencies:
     parse5 "^2.2.1"
 
+"@angular/platform-webworker-dynamic@4.0.0-beta.2":
+  version "4.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@angular/platform-webworker-dynamic/-/platform-webworker-dynamic-4.0.0-beta.2.tgz#debac835bf8ef94890e7cddb2b49f88023637070"
+
+"@angular/platform-webworker@4.0.0-beta.2":
+  version "4.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@angular/platform-webworker/-/platform-webworker-4.0.0-beta.2.tgz#4055afacb7158ce9a014dac1ffc58ae0d1cf1744"
+
 "@angular/router@3.4.1":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@angular/router/-/router-3.4.1.tgz#079c8580943547a710f292026ac86a08d336a49d"
@@ -114,7 +122,7 @@ acorn@^4.0.3:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-4.0.4.tgz#17a8d6a7a6c4ef538b814ec9abac2779293bf30a"
 
-add-asset-html-webpack-plugin@^1.0.2:
+add-asset-html-webpack-plugin@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/add-asset-html-webpack-plugin/-/add-asset-html-webpack-plugin-1.0.2.tgz#f22748635fbb27724d54d8f2cd1dedb2bcd18cd0"
   dependencies:
@@ -3531,7 +3539,7 @@ wbuf@^1.1.0, wbuf@^1.4.0:
   dependencies:
     minimalistic-assert "^1.0.0"
 
-webpack-bundle-analyzer@^2.2.1:
+webpack-bundle-analyzer@2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/webpack-bundle-analyzer/-/webpack-bundle-analyzer-2.2.1.tgz#a90edc00eb9cea917d2af009529decf71d7f4a84"
   dependencies:
