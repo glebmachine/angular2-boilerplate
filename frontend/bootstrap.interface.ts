@@ -1,6 +1,11 @@
 import 'zone.js';
 
-import { bootstrapWorkerUi, WORKER_APP_LOCATION_PROVIDERS } from '@angular/platform-webworker';
+import {
+  bootstrapWorkerUi,
+  WORKER_UI_LOCATION_PROVIDERS,
+  ServiceMessageBrokerFactory,
+  PRIMITIVE,
+} from '@angular/platform-webworker';
 
 const workerScriptUrl = URL.createObjectURL(new Blob([`
   var importScripts_ = this.importScripts;
@@ -20,5 +25,13 @@ const workerScriptUrl = URL.createObjectURL(new Blob([`
 }));
 
 bootstrapWorkerUi(workerScriptUrl, [
-  ...WORKER_APP_LOCATION_PROVIDERS,
-]);
+  ...WORKER_UI_LOCATION_PROVIDERS,
+]).then((hWnd) => {
+  // register methods the WebWorker needs to run on the UI thread.
+  let brokerFactory: ServiceMessageBrokerFactory = hWnd.injector.get(ServiceMessageBrokerFactory);
+  let broker = brokerFactory.createMessageBroker('UI_THREAD_CHANNEL', false);
+
+  broker.registerMethod('redirect', [PRIMITIVE],  (href: string) => {
+      window.location.href = href;
+  });
+});
