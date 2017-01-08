@@ -1,19 +1,18 @@
 const webpack = require('webpack');
 const WebpackErrorNotificationPlugin = require('webpack-error-notification');
 const webpackMerge = require('webpack-merge');
+const CompressionPlugin = require('compression-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-global.NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
+const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
+const AOT = process.env.AOT === 'true';
+
 const webpackConfig = {
   output: {
     path: `${process.cwd()}/www/`,
     publicPath: '/',
-    // при HMR нельзя у модуля использовать chunkhash, поэтому на тестовой среде это обычный хеш
-    filename: NODE_ENV === 'development'
-      ? 'build/[name].js?[hash]'
-      : 'build/[name].js?[chunkhash]',
-    chunkFilename: NODE_ENV === 'development'
-      ? 'chunk/[id].js?[hash]'
-      : 'chunk/[id].js?[chunkhash]',
+    filename: 'build/[name].js?[hash]',
+    chunkFilename: 'chunk/[id].js?[hash]',
   },
   resolve: {
     extensions: ['.ts', '.js', '.styl', '.css'],
@@ -22,11 +21,14 @@ const webpackConfig = {
     rules: [
       {
         test: /\.ts$/,
-        exclude: [/node_modules/],
+        include: [
+          /compiled/,
+          /frontend/,
+        ],
         use: [
-          'awesome-typescript-loader?{configFileName: "tsconfig.json"}',
+          'awesome-typescript-loader?{configFileName: "tsconfig.json", cacheDirectory: ".compiled/awcache"}',
           'angular2-template-loader',
-          'angular-router-loader',
+          `angular-router-loader?loader=system&genDir=.compiled/frontend&aot=${AOT}`,
         ],
       }, {
         test: /\.jade$/,
@@ -36,32 +38,71 @@ const webpackConfig = {
         use: ['html-loader'],
       }, {
         test: /\.css$/,
-        use: ['to-string-loader', 'css-loader'],
+        use: ['to-string-loader', 'css-loader?minimize'],
       }, {
         test: /\.styl$/,
-        use: ['to-string-loader', 'css-loader', 'stylus-loader'],
+        use: ['to-string-loader', 'css-loader?minimize', 'stylus-loader'],
       },
     ],
   },
   plugins: [
-    new webpack.ContextReplacementPlugin(
-      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/
-    ),
+    new WebpackErrorNotificationPlugin(),
+    // Лечит часть проблем внутри ангуляра
+    new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/),
+    new webpack.DefinePlugin({
+      NODE_ENV: JSON.stringify(NODE_ENV),
+      AOT: JSON.stringify(AOT),
+    }),
+    // Выкладывает анализ билдов
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      openAnalyzer: false,
+      reportFilename: 'meta/bundle_report.html',
+      statsFilename: 'meta/bundle_stats.json',
+      generateStatsFile: true,
+    }),
   ],
+  performance: {
+    hints: false,
+  },
 };
 
-const webpackDevelopmentConfig = {
+const webpackConfigDevelopment = {
   output: {
     pathinfo: true,
   },
+};
+
+const webpackConfigProduction = {
+  devtool: 'inline-source-map',
+  output: {
+    // при HMR нельзя у модуля использовать chunkhash,
+    // поэтому поэтому мы его подменяем только при боевой сборке
+    // (это нужно, чтобы кешбастить только протухшие чанки)
+    filename: 'build/[name].js?[chunkhash]',
+    chunkFilename: 'chunk/[id].js?[chunkhash]',
+  },
   plugins: [
-    new WebpackErrorNotificationPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      beautify: false,
+      mangle: true,
+      compress: {
+        screw_ie8: true,
+        warnings: false,
+      },
+      unsafe: true,
+      comments: false,
+    }),
+    new CompressionPlugin({
+      asset: '[path].gz?[query]',
+      algorithm: 'zopfli',
+    }),
   ],
 };
 
-if (NODE_ENV === 'development') {
-  module.exports = webpackMerge(webpackConfig, webpackDevelopmentConfig);
+if (NODE_ENV === 'production') {
+  module.exports = webpackMerge(webpackConfig, webpackConfigProduction);
 } else {
-  module.exports = webpackConfig;
+  module.exports = webpackMerge(webpackConfig, webpackConfigDevelopment);
 }
 

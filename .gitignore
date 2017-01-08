@@ -2,4 +2,6 @@ node_modules
 www
 npm-debug.log
 yarn-error.log
+.compiled
 .awcache
+.DS_Store

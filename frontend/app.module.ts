@@ -1,15 +1,12 @@
-// Polyfills
-import 'reflect-metadata';
 import 'zone.js';
-import 'rxjs';
 
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent }  from './application';
+import { AppComponent }  from './app.component';
 import { RouterModule }  from '@angular/router';
 
 @NgModule({
-  imports:      [
+  imports: [
     BrowserModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/main', pathMatch: 'full' },

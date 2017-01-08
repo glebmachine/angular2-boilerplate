@@ -1,45 +1,44 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./_common.config.js');
+
+const AOT = process.env.AOT === 'true';
+const DLL = process.env.DLL === 'true';
+const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
 
 // base config
 const webpackConfig = {
   entry: {
-    application: './frontend/bootstrap.ts',
+    application: AOT
+      ? './frontend/bootstrap.browser.aot.ts'
+      : './frontend/bootstrap.browser.ts',
   },
   plugins: [
-    new webpack.DllReferencePlugin({
-      context: '.',
-      manifest: require('./../www/manifests/vendors-manifest.json'),
-    }),
     new HtmlWebpackPlugin({
       template: './frontend/index.jade',
       filename: 'index.html',
     }),
     new webpack.NamedModulesPlugin(),
+    new webpack.ProgressPlugin(),
   ],
 };
 
-// production extension
-const webpackConfigProduction = {
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      mangle: {
-        screw_ie8: true,
-        keep_fnames: true,
-      },
-      compress: {
-        warnings: false,
-        screw_ie8: true,
-      },
-      comments: false,
+// Используем DLLки для быстрой разработки на локальной тачке
+if (DLL) {
+  webpackConfig.plugins = webpackConfig.plugins.concat([
+    new AddAssetHtmlPlugin({
+      filepath: require.resolve('./../www/build/vendors.js'),
+      includeSourcemap: false,
     }),
-  ],
-};
+    new webpack.DllReferencePlugin({
+      context: '.',
+      manifest: require('./../www/meta/manifest-vendors.json'),
+    }),
+  ]);
+}
 
-// development extension
 const webpackConfigDevelopment = {
   devServer: {
     contentBase: 'www',
@@ -51,6 +50,9 @@ const webpackConfigDevelopment = {
     port: 3000,
     compress: true,
   },
+};
+
+const webpackConfigProduction = {
 };
 
 if (NODE_ENV === 'production') {

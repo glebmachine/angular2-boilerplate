@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  template: require('./tpl.jade'),
-  styles: [
-    require('./style.styl'),
+  templateUrl: './tpl.jade',
+  styleUrls: [
+    './style.styl',
   ],
 })
 export class StateComponent {}
