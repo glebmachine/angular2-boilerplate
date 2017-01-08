@@ -1,11 +1,11 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./_common.config.js');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const AOT = process.env.AOT === 'true';
+const DLL = process.env.DLL === 'true';
 const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
 
 // base config
@@ -25,16 +25,20 @@ const webpackConfig = {
   ],
 };
 
-// if (!AOT) {
-//   webpackConfig.plugins = webpackConfig.plugins.concat([
-//     new webpack.DllReferencePlugin({
-//       context: '.',
-//       manifest: require('./../www/manifests/vendors-manifest.json'),
-//     }),
-//   ]);
-// }
+// Используем DLLки для быстрой разработки на локальной тачке
+if (DLL) {
+  webpackConfig.plugins = webpackConfig.plugins.concat([
+    new AddAssetHtmlPlugin({
+      filepath: require.resolve('./../www/build/vendors.js'),
+      includeSourcemap: false,
+    }),
+    new webpack.DllReferencePlugin({
+      context: '.',
+      manifest: require('./../www/meta/manifest-vendors.json'),
+    }),
+  ]);
+}
 
-// development extension
 const webpackConfigDevelopment = {
   devServer: {
     contentBase: 'www',
@@ -48,32 +52,8 @@ const webpackConfigDevelopment = {
   },
 };
 
-// production extension
 const webpackConfigProduction = {
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      mangle: true,
-      compress: {
-        warnings: false,
-      },
-      unsafe: true,
-      comments: false,
-    }),
-    new CompressionPlugin({
-      asset: '[path].gz?[query]',
-    }),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      openAnalyzer: false,
-      reportFilename: 'bundle_report.html',
-      statsFilename: 'bundle_stats.json',
-      generateStatsFile: true,
-    }),
-  ],
 };
-
-console.log(webpackConfig);
 
 if (NODE_ENV === 'production') {
   module.exports = webpackMerge(commonConfig, webpackConfig, webpackConfigProduction);

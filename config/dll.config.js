@@ -3,6 +3,7 @@ const webpackMerge = require('webpack-merge');
 const commonConfig = require('./_common.config.js');
 
 const webpackConfig = {
+  devtool: 'cheap-module-source-map',
   entry: {
     vendors: [
       'core-js/es7/reflect',
@@ -19,20 +20,8 @@ const webpackConfig = {
     library: '[name]',
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      mangle: {
-        screw_ie8: true,
-        keep_fnames: true,
-      },
-      compress: {
-        warnings: false,
-        screw_ie8: true,
-      },
-      comments: false,
-    }),
     new webpack.DllPlugin({
-      path: 'www/manifests/[name]-manifest.json',
+      path: 'www/meta/manifest-[name].json',
       name: '[name]',
     }),
   ],
