@@ -18,11 +18,11 @@ import { StateComponent } from './states/main/component';
       { path: 'main', loadChildren: './states/main/index#MainStateModule' },
       { path: 'team', loadChildren: './states/team/index#MainStateModule' },
       { path: 'about', loadChildren: './states/about/index#MainStateModule?sync=true' },
-    ], { useHash: true }),
+    ]),
   ],
   providers: [
     WORKER_APP_LOCATION_PROVIDERS,
-    {provide: APP_BASE_HREF, useValue: '' },
+    { provide: APP_BASE_HREF, useValue: '' },
   ],
   declarations: [ AppComponent ],
   bootstrap:    [ AppComponent ]

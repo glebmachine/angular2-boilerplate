@@ -26,12 +26,13 @@ const workerScriptUrl = URL.createObjectURL(new Blob([`
 
 bootstrapWorkerUi(workerScriptUrl, [
   ...WORKER_UI_LOCATION_PROVIDERS,
-]).then((hWnd) => {
-  // register methods the WebWorker needs to run on the UI thread.
-  let brokerFactory: ServiceMessageBrokerFactory = hWnd.injector.get(ServiceMessageBrokerFactory);
-  let broker = brokerFactory.createMessageBroker('UI_THREAD_CHANNEL', false);
+])
+// .then((hWnd) => {
+//   // register methods the WebWorker needs to run on the UI thread.
+//   let brokerFactory: ServiceMessageBrokerFactory = hWnd.injector.get(ServiceMessageBrokerFactory);
+//   let broker = brokerFactory.createMessageBroker('UI_THREAD_CHANNEL', false);
 
-  broker.registerMethod('redirect', [PRIMITIVE],  (href: string) => {
-      window.location.href = href;
-  });
-});
+//   broker.registerMethod('redirect', [PRIMITIVE],  (href: string) => {
+//       window.location.href = href;
+//   });
+// });
