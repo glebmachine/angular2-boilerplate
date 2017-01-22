@@ -5,6 +5,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 
 const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
 const AOT = process.env.AOT === 'true';
+const HMR = NODE_ENV !== 'production';
 
 const webpackConfig = {
   output: {
@@ -28,7 +29,7 @@ const webpackConfig = {
           'awesome-typescript-loader?{configFileName: "tsconfig.json", cacheDirectory: ".compiled/awcache"}',
           'angular2-template-loader',
           `angular-router-loader?loader=system&genDir=.compiled/frontend&aot=${AOT}`,
-        ],
+        ].concat(HMR ? '@angularclass/hmr-loader' : []),
       }, {
         test: /\.jade$/,
         use: ['html-loader', 'jade-html-loader'],
@@ -99,4 +100,3 @@ if (NODE_ENV === 'production') {
 } else {
   module.exports = webpackMerge(webpackConfig, webpackConfigDevelopment);
 }
-
