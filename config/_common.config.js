@@ -101,5 +101,3 @@ if (NODE_ENV === 'production') {
 } else {
   module.exports = webpackMerge(webpackConfig, webpackConfigDevelopment);
 }
-
-console.log(module.exports.module.rules);

@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
 
 @Component({
-  templateUrl: './tpl.jade',
+  templateUrl: './tpl.html',
   styleUrls: [
     './style.styl',
   ],
 })
-export class StateComponent {}
+export class StateComponent {
+  localState = {
+    someVar: 'demo14',
+  };
+
+  constructor() {}
+}

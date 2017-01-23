@@ -22,6 +22,10 @@
   version "4.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/@angular/core/-/core-4.0.0-beta.2.tgz#41a4709d29430970b3c531ca2ab9caf14bc35b20"
 
+"@angular/forms@^2.4.4":
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-2.4.4.tgz#9679ca369d5bc2968ee1a67634ac221d75487364"
+
 "@angular/http@4.0.0-beta.2":
   version "4.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/@angular/http/-/http-4.0.0-beta.2.tgz#27fd93433c50bcdf76ce40c8a72697fe8aa5abb2"
@@ -63,6 +67,10 @@
   resolved "https://registry.yarnpkg.com/@angularclass/hmr-loader/-/hmr-loader-3.0.2.tgz#c789182411f09d0b98929e6acbfd3e4aeaace597"
   dependencies:
     loader-utils "^0.2.15"
+
+"@angularclass/hmr@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@angularclass/hmr/-/hmr-1.2.2.tgz#46a18f89a1e94d05c268b83c9480e005f73fc265"
 
 "@types/requirejs@^2.1.28":
   version "2.1.28"

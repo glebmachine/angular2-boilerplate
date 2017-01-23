@@ -8,14 +8,21 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const AOT = process.env.AOT === 'true';
 const DLL = process.env.DLL === 'true';
 const NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
+const HMR = NODE_ENV !== 'production';
+
+let entrypoint = './frontend/bootstrap.browser.ts';
+
+if (AOT) {
+  entrypoint = './frontend/bootstrap.browser.aot.ts';
+} else if (HMR) {
+  entrypoint = './frontend/bootstrap.browser.hmr.ts';
+}
 
 // base config
 const webpackConfig = {
   target: 'web',
   entry: {
-    application: AOT
-      ? './frontend/bootstrap.browser.aot.ts'
-      : './frontend/bootstrap.browser.ts',
+    application: entrypoint,
   },
   plugins: [
     new HtmlWebpackPlugin({
