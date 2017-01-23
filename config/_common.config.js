@@ -25,11 +25,12 @@ const webpackConfig = {
           /compiled/,
           /frontend/,
         ],
-        use: [
-          'awesome-typescript-loader?{configFileName: "tsconfig.json", cacheDirectory: ".compiled/awcache"}',
-          'angular2-template-loader',
-          `angular-router-loader?loader=system&genDir=.compiled/frontend&aot=${AOT}`,
-        ].concat(HMR ? '@angularclass/hmr-loader' : []),
+        use: (HMR ? ['@angularclass/hmr-loader'] : [])
+          .concat([
+            'awesome-typescript-loader?{configFileName: "tsconfig.json", cacheDirectory: ".compiled/awcache"}',
+            'angular2-template-loader',
+            `angular-router-loader?loader=system&genDir=.compiled/frontend&aot=${AOT}`,
+          ]),
       }, {
         test: /\.jade$/,
         use: ['html-loader', 'jade-html-loader'],
@@ -100,3 +101,5 @@ if (NODE_ENV === 'production') {
 } else {
   module.exports = webpackMerge(webpackConfig, webpackConfigDevelopment);
 }
+
+console.log(module.exports.module.rules);
